@@ -43,7 +43,7 @@
                 </Label>
                 <Label
                     Text="Nouveau"
-                    FontSize="Large">
+                    FontSize="Medium">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding NavigateCommand}" CommandParameter="Nouveau"/>
