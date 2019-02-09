@@ -10,7 +10,7 @@
             <StackLayout Padding="20">
                 <Label
                     Text="Accueil"
-                    FontSize="Medium">
+                    FontSize="Large">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding NavigateCommand}" CommandParameter="MainPage"/>
