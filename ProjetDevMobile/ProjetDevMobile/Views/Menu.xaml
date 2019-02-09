@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                  prism:ViewModelLocator.AutowireViewModel="True"
+                  x:Class="ProjetDevMobile.Views.Menu">
+
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu">
+            <StackLayout Padding="20">
+                <Label
+                    Text="Accueil"
+                    FontSize="Large">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding NavigateCommand}" CommandParameter="MainPage"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label
+                    Text="Application"
+                    FontSize="Large">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding NavigateCommand}" CommandParameter="Enregistrements"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label
+                    Text="Carte"
+                    FontSize="Medium">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding NavigateCommand}" CommandParameter="Carte"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label
+                    Text="Enregistrements"
+                    FontSize="Medium">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding NavigateCommand}" CommandParameter="Enregistrements"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label
+                    Text="Nouveau"
+                    FontSize="Large">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding NavigateCommand}" CommandParameter="Nouveau"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label
+                    Text="Bonus"
+                    FontSize="Large">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding NavigateCommand}" CommandParameter="Bonus"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    
+</MasterDetailPage>

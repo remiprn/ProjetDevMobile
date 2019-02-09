@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjetDevMobile.Views.MainPage"
+             Title="{Binding Title}">
+
+    <StackLayout HorizontalOptions="CenterAndExpand" Padding="20">
+        <Label Text="Projet developpement mobile" 
+               VerticalOptions="Start" 
+               HorizontalTextAlignment="Center" 
+               FontSize="30"/>
+        <Label Text="2018 - 2019" 
+               VerticalOptions="Start" 
+               HorizontalTextAlignment="Center" 
+               FontSize="30"/>
+        <Label Text="Groupe : JAGER / PIERRON" 
+               VerticalOptions="CenterAndExpand" 
+               HorizontalTextAlignment="Center" 
+               FontSize="20"/>
+    </StackLayout>
+
+</ContentPage>
