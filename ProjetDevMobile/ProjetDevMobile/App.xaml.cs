@@ -4,6 +4,7 @@ using ProjetDevMobile.ViewModels;
 using ProjetDevMobile.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ProjetDevMobile.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ProjetDevMobile
@@ -35,6 +36,9 @@ namespace ProjetDevMobile
             containerRegistry.RegisterForNavigation<Carte, CarteViewModel>();
             containerRegistry.RegisterForNavigation<Bonus, BonusViewModel>();
             containerRegistry.RegisterForNavigation<Nouveau, NouveauViewModel>();
+
+            containerRegistry.RegisterSingleton<IEnregistrementService, EnregistrementService>();
+            containerRegistry.RegisterSingleton<ITagService, TagService>();
         }
     }
 }

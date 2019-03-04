@@ -2,8 +2,68 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProjetDevMobile.Views.Enregistrements"
              Title="{Binding Title}">
-  
+
+    <StackLayout>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" Orientation="Horizontal">
+            <ImageButton Source="{Binding ImageAdresseDrink}" HeightRequest="40" WidthRequest="40" Command="{Binding CommandChangeTagDrink}"></ImageButton>
+            <Label Text="#Drink"/>
+            <ImageButton Source="{Binding ImageAdresseFood}" HeightRequest="40" WidthRequest="40" Command="{Binding CommandChangeTagFood}"></ImageButton>
+            <Label Text="#Food"/>
+            <ImageButton Source="{Binding ImageAdresseToSee}" HeightRequest="40" WidthRequest="40" Command="{Binding CommandChangeTagToSee}"></ImageButton>
+            <Label Text="#ToSee"/>
+        </StackLayout>
+
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ListView x:Name="ListeEnregistrements"
+                      ItemsSource="{Binding Enregistrements}"
+                      HasUnevenRows="True">
+
+                <ListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemTapped" 
+                                      Command="{Binding OnNavDetail}"
+                                      EventArgsParameterPath="Item" />
+                </ListView.Behaviors>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout BackgroundColor="LightGray"
+                                         Orientation="Horizontal"
+                                         VerticalOptions="FillAndExpand">
+
+                                <Label
+                                Text="{Binding Nom}"
+                                FontAttributes="Bold"
+                                FontSize="50"
+                                Margin="20,10,10,5"/>
+
+                                <StackLayout Orientation="Horizontal" Spacing="0">
+                                    <Label Text="#"/>
+                                    <Label
+                                    Text="{Binding Tag}"
+                                    FontSize="30"
+                                    Margin="20,10,10,5"/>
+                                </StackLayout>
+                                
+
+                                <Label
+                                Text="Today"
+                                FontSize="20"
+                                FontAttributes="Italic"
+                                VerticalOptions="Center"
+                                HorizontalOptions="End"
+                                HorizontalTextAlignment="End"
+                                Margin="0,0,20,0"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </StackLayout>
+
 </ContentPage>

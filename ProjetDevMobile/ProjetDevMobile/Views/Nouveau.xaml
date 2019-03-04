@@ -5,5 +5,12 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProjetDevMobile.Views.Nouveau"
              Title="{Binding Title}">
+
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Entry Text="{Binding Nom}"/>
+        <Entry Text="{Binding Description}"/>
+        <Picker ItemsSource="{Binding ListeTags}" Title="Tag" SelectedItem="{Binding SelectedTag}"/>
+        <Button Text="Save" Command="{Binding CommandAjoutEnregistrement}"/>
+    </StackLayout>
   
 </ContentPage>
