@@ -7,6 +7,8 @@
              Title="{Binding Title}">
 
     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Image Source="{Binding SourceImage}"/>
+        <Button Text="Take Photo" Command="{Binding CommandPrendrePhoto}"/>
         <Entry Text="{Binding Nom}"/>
         <Entry Text="{Binding Description}"/>
         <Picker ItemsSource="{Binding ListeTags}" Title="Tag" SelectedItem="{Binding SelectedTag}"/>
