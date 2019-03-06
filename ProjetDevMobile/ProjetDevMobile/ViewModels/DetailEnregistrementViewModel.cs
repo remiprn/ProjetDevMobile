@@ -14,6 +14,12 @@ namespace ProjetDevMobile.ViewModels
     {
         private Enregistrement _enregistrement;
 
+        private ImageSource _sourceImage = null;
+        public ImageSource SourceImage
+        {
+            get { return _sourceImage; }
+            set { SetProperty(ref _sourceImage, value); }
+        }
         private string _nom;
         public string Nom
         {
@@ -53,6 +59,7 @@ namespace ProjetDevMobile.ViewModels
             base.OnNavigatingTo(parameters);
 
             _enregistrement = parameters.GetValue<Enregistrement>("Enregistrement");
+            this.SourceImage = _enregistrement.GetImageSource();
             this.Nom = _enregistrement.Nom;
             this.Tag = _enregistrement.Tag;
             this.Description = _enregistrement.Description;
