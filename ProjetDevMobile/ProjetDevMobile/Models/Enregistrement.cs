@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using Xamarin.Forms;
 
 namespace ProjetDevMobile.Models
 {
@@ -25,5 +27,10 @@ namespace ProjetDevMobile.Models
         }
 
         public Enregistrement() { }
+
+        public ImageSource GetImageSource()
+        {
+            return ImageSource.FromStream(() => new MemoryStream(Image));
+        }
     }
 }

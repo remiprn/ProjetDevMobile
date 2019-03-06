@@ -58,12 +58,17 @@ namespace ProjetDevMobile.ViewModels
             this.Description = _enregistrement.Description;
         }
 
-        private void UpdateEnregistrement()
+        private async void UpdateEnregistrement()
         {
-            var navigationParam = new NavigationParameters();
-            navigationParam.Add("Enregistrement", _enregistrement);
+            var reponse = await App.Current.MainPage.DisplayAlert("Modification", "Etes-vous sûr de vouloir modifier l'enregistrement ?", "Confirmer", "Annuler");
 
-            NavigationService.NavigateAsync("Nouveau", navigationParam);
+            if (reponse)
+            {
+                var navigationParam = new NavigationParameters();
+                navigationParam.Add("Enregistrement", _enregistrement);
+
+                await NavigationService.NavigateAsync("Nouveau", navigationParam);
+            }
         }
 
         private async void DeleteEnregistrement()

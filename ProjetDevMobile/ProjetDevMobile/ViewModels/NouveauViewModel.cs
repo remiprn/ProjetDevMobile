@@ -53,7 +53,7 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _modeNouveau, value); }
         }
 
-        private ImageSource _sourceImage;
+        private ImageSource _sourceImage = null;
         public ImageSource SourceImage
         {
             get { return _sourceImage; }
@@ -65,12 +65,11 @@ namespace ProjetDevMobile.ViewModels
         public NouveauViewModel(INavigationService navigationService, IEnregistrementService enregistrementService)
             : base(navigationService)
         {
-            CommandAjoutEnregistrement = new DelegateCommand(AjoutEnregistrement);
+            CommandAjoutEnregistrement = new DelegateCommand(AjoutEnregistrement, CanAjout).ObservesProperty(() => Nom).ObservesProperty(() => Description).ObservesProperty(() => SourceImage).ObservesProperty(() => SelectedTag);
             CommandPrendrePhoto = new DelegateCommand(PrendrePhotoAsync);
             _enregistrementService = enregistrementService;
             ListeTags.AddRange(Enum.GetNames(typeof(Enregistrement.ETag)));
-            SourceImage = "@drawable/uncheck.png";
-        }
+        } 
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
@@ -89,25 +88,46 @@ namespace ProjetDevMobile.ViewModels
                 Title = "Edition";
                 Nom = _enregistrement.Nom;
                 Description = _enregistrement.Description;
-                //SourceImage = _enregistrement.Image;
+                SourceImage = _enregistrement.GetImageSource();
                 SelectedTag = _enregistrement.Tag;
             }
         }
 
-        private void AjoutEnregistrement()
+        private bool CanAjout()
         {
-            if (ModeNouveau)
+            if (Nom == "")
+                return false;
+
+            if (Description == "")
+                return false;
+
+            if (SelectedTag == "")
+                return false;
+            
+            if (SourceImage == null)
+                return false;
+
+            return true;
+        }
+        private async void AjoutEnregistrement()
+        {
+            var reponse = await App.Current.MainPage.DisplayAlert("Confirmation", "Voulez-vous enregistrer ?", "Confirmer", "Annuler");
+
+            if (reponse)
             {
-                _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, DateTime.Today);
-                _enregistrementService.AddEnregistrement(_enregistrement);
+                if (ModeNouveau)
+                {
+                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, DateTime.Today);
+                    _enregistrementService.AddEnregistrement(_enregistrement);
+                }
+                else
+                {
+                    _enregistrement.Nom = Nom;
+                    _enregistrement.Description = Description;
+                    //_enregistrementService.UpdateEnregistrement(_enregistrement);
+                }
+                await NavigationService.NavigateAsync("/Menu/NavigationPage/MainPage/Enregistrements");
             }
-            else
-            {
-                _enregistrement.Nom = Nom;
-                _enregistrement.Description = Description;
-                //_enregistrementService.UpdateEnregistrement(_enregistrement);
-            }
-            NavigationService.NavigateAsync("/Menu/NavigationPage/MainPage/Enregistrements");
         }
 
         private async void PrendrePhotoAsync()
