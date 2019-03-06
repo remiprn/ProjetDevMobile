@@ -12,17 +12,18 @@ namespace ProjetDevMobile.Services
         public EnregistrementService()
         {
             _enregistrements = new List<Enregistrement>();
+            byte[] img = new byte[] { 0x20 };
 
-            Enregistrement enregistrement = new Enregistrement("Best beers in town !", "Description 1", "Drink", "image 1", DateTime.Today);
+            Enregistrement enregistrement = new Enregistrement("Best beers in town !", "Description 1", "Drink", img, DateTime.Today);
             _enregistrements.Add(enregistrement);
 
-            enregistrement = new Enregistrement("Amazing church", "Description 2", "ToSee", "image 2", new DateTime(2019, 2, 28));
+            enregistrement = new Enregistrement("Amazing church", "Description 2", "ToSee", img, new DateTime(2019, 2, 28));
             _enregistrements.Add(enregistrement);
 
-            enregistrement = new Enregistrement("Mojito bar", "Description 3", "Drink", "image 3", new DateTime(2019, 2, 15));
+            enregistrement = new Enregistrement("Mojito bar", "Description 3", "Drink", img, new DateTime(2019, 2, 15));
             _enregistrements.Add(enregistrement);
 
-            enregistrement = new Enregistrement("Sushi to go", "Description 4", "Food", "image 4", new DateTime(2018, 10, 20));
+            enregistrement = new Enregistrement("Sushi to go", "Description 4", "Food", img, new DateTime(2018, 10, 20));
             _enregistrements.Add(enregistrement);
         }
 
