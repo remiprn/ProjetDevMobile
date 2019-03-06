@@ -49,6 +49,7 @@ namespace ProjetDevMobile.ViewModels
         public DelegateCommand CommandChangeTagDrink { get; private set; }
         public DelegateCommand CommandChangeTagFood { get; private set; }
         public DelegateCommand CommandChangeTagToSee { get; private set; }
+        public DelegateCommand<object> OnNavEnregistrement { get; private set; }
 
         private IEnregistrementService _enregistrementService;
 
@@ -63,6 +64,7 @@ namespace ProjetDevMobile.ViewModels
             CommandChangeTagDrink = new DelegateCommand(ChangeTagDrink);
             CommandChangeTagFood = new DelegateCommand(ChangeTagFood);
             CommandChangeTagToSee = new DelegateCommand(ChangeTagToSee);
+            OnNavEnregistrement = new DelegateCommand<object>(NavEnregistrement);
         }
 
         private void ChangeTagDrink()
@@ -119,6 +121,14 @@ namespace ProjetDevMobile.ViewModels
         {
             AllEnregistrements = _enregistrementService.GetEnregistrements();
             updateEnregistrement();
+        }
+
+        public void NavEnregistrement(object enregistrement)
+        {
+            var navigationParam = new NavigationParameters();
+            navigationParam.Add("Enregistrement", enregistrement);
+
+            NavigationService.NavigateAsync("DetailEnregistrement", navigationParam);
         }
     }
 }
