@@ -124,7 +124,7 @@ namespace ProjetDevMobile.ViewModels
                 {
                     _enregistrement.Nom = Nom;
                     _enregistrement.Description = Description;
-                    //_enregistrementService.UpdateEnregistrement(_enregistrement);
+                    _enregistrementService.UpdateEnregistrement(_enregistrement);
                 }
                 await NavigationService.NavigateAsync("/Menu/NavigationPage/MainPage/Enregistrements");
             }

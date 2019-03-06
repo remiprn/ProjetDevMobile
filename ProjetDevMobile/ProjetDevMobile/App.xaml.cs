@@ -5,6 +5,7 @@ using ProjetDevMobile.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ProjetDevMobile.Services;
+using ProjetDevMobile.Client;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ProjetDevMobile
@@ -40,6 +41,7 @@ namespace ProjetDevMobile
 
             containerRegistry.RegisterSingleton<IEnregistrementService, EnregistrementService>();
             containerRegistry.RegisterSingleton<ITagService, TagService>();
+            containerRegistry.RegisterSingleton<ILiteDBClient, LiteDBClient>();
         }
     }
 }

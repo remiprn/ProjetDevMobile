@@ -13,6 +13,8 @@ namespace ProjetDevMobile.Services
 
         void AddEnregistrement(Enregistrement enregistrement);
 
+        void UpdateEnregistrement(Enregistrement enregistrement);
+
         void DeleteEnregistrement(Enregistrement enregistrement);
     }
 }

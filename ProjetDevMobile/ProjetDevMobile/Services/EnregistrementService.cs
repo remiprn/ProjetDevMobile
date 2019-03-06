@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ProjetDevMobile.Client;
 using ProjetDevMobile.Models;
 
 namespace ProjetDevMobile.Services
@@ -9,10 +10,17 @@ namespace ProjetDevMobile.Services
     {
         private List<Enregistrement> _enregistrements;
 
-        public EnregistrementService()
+        private ILiteDBClient _liteDBClient;
+        private string _dbCollectionEnregistrement = "collectionEnregistrement";
+
+
+        public EnregistrementService(ILiteDBClient liteDBClient)
         {
-            _enregistrements = new List<Enregistrement>();
-            byte[] img = new byte[] { 0x20 };
+            _liteDBClient = liteDBClient;
+
+            _enregistrements = _liteDBClient.GetCollectionFromDB<Enregistrement>(_dbCollectionEnregistrement);
+
+            /*byte[] img = new byte[] { };
 
             Enregistrement enregistrement = new Enregistrement("Best beers in town !", "Description 1", "Drink", img, DateTime.Today);
             _enregistrements.Add(enregistrement);
@@ -24,16 +32,23 @@ namespace ProjetDevMobile.Services
             _enregistrements.Add(enregistrement);
 
             enregistrement = new Enregistrement("Sushi to go", "Description 4", "Food", img, new DateTime(2018, 10, 20));
-            _enregistrements.Add(enregistrement);
+            _enregistrements.Add(enregistrement);*/
         }
 
         public void AddEnregistrement(Enregistrement enregistrement)
         {
+            _liteDBClient.InsertObjectInDB<Enregistrement>(enregistrement, _dbCollectionEnregistrement);
             _enregistrements.Add(enregistrement);
+        }
+
+        public void UpdateEnregistrement(Enregistrement enregistrement)
+        {
+            _liteDBClient.UpdateObjectInDB<Enregistrement>(enregistrement, _dbCollectionEnregistrement);
         }
 
         public void DeleteEnregistrement(Enregistrement enregistrement)
         {
+            _liteDBClient.RemoveObjectFromDB<Enregistrement>(enregistrement.Id, _dbCollectionEnregistrement);
             _enregistrements.Remove(enregistrement);
         }
 
