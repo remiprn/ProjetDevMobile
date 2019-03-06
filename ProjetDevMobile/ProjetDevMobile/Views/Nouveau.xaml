@@ -8,10 +8,10 @@
 
     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <Image Source="{Binding SourceImage}"/>
-        <Button Text="Take Photo" Command="{Binding CommandPrendrePhoto}"/>
+        <Button Text="Take Photo" Command="{Binding CommandPrendrePhoto}" IsEnabled="{Binding ModeNouveau}"/>
         <Entry Text="{Binding Nom}"/>
         <Entry Text="{Binding Description}"/>
-        <Picker ItemsSource="{Binding ListeTags}" Title="Tag" SelectedItem="{Binding SelectedTag}"/>
+        <Picker ItemsSource="{Binding ListeTags}" Title="Tag" SelectedItem="{Binding SelectedTag}" IsEnabled="{Binding ModeNouveau}"/>
         <Button Text="Save" Command="{Binding CommandAjoutEnregistrement}"/>
     </StackLayout>
   

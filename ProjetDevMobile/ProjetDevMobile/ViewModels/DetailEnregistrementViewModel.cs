@@ -60,7 +60,10 @@ namespace ProjetDevMobile.ViewModels
 
         private void UpdateEnregistrement()
         {
-            throw new NotImplementedException();
+            var navigationParam = new NavigationParameters();
+            navigationParam.Add("Enregistrement", _enregistrement);
+
+            NavigationService.NavigateAsync("Nouveau", navigationParam);
         }
 
         private async void DeleteEnregistrement()

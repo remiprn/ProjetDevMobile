@@ -17,6 +17,8 @@ namespace ProjetDevMobile.ViewModels
 	public class NouveauViewModel : ViewModelBase
 	{
         private IEnregistrementService _enregistrementService;
+        private Enregistrement _enregistrement;
+
         public DelegateCommand CommandAjoutEnregistrement { get; private set; }
         public DelegateCommand CommandPrendrePhoto { get; private set; }
 
@@ -44,6 +46,12 @@ namespace ProjetDevMobile.ViewModels
             get { return _selectedTag; }
             set { SetProperty(ref _selectedTag, value); }
         }
+        private Boolean _modeNouveau;
+        public Boolean ModeNouveau
+        {
+            get { return _modeNouveau; }
+            set { SetProperty(ref _modeNouveau, value); }
+        }
 
         private ImageSource _sourceImage;
         public ImageSource SourceImage
@@ -57,7 +65,6 @@ namespace ProjetDevMobile.ViewModels
         public NouveauViewModel(INavigationService navigationService, IEnregistrementService enregistrementService)
             : base(navigationService)
         {
-            Title = "Nouveau";
             CommandAjoutEnregistrement = new DelegateCommand(AjoutEnregistrement);
             CommandPrendrePhoto = new DelegateCommand(PrendrePhotoAsync);
             _enregistrementService = enregistrementService;
@@ -65,10 +72,41 @@ namespace ProjetDevMobile.ViewModels
             SourceImage = "@drawable/uncheck.png";
         }
 
+        public override void OnNavigatingTo(INavigationParameters parameters)
+        {
+            base.OnNavigatingTo(parameters);
+
+            _enregistrement = parameters.GetValue<Enregistrement>("Enregistrement");
+
+            if (_enregistrement == null)
+            {
+                ModeNouveau = true;
+                Title = "Nouveau";
+            }
+            else
+            {
+                ModeNouveau = false;
+                Title = "Edition";
+                Nom = _enregistrement.Nom;
+                Description = _enregistrement.Description;
+                //SourceImage = _enregistrement.Image;
+                SelectedTag = _enregistrement.Tag;
+            }
+        }
+
         private void AjoutEnregistrement()
         {
-            Enregistrement e = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, DateTime.Today);
-            _enregistrementService.AddEnregistrement(e);
+            if (ModeNouveau)
+            {
+                _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, DateTime.Today);
+                _enregistrementService.AddEnregistrement(_enregistrement);
+            }
+            else
+            {
+                _enregistrement.Nom = Nom;
+                _enregistrement.Description = Description;
+                //_enregistrementService.UpdateEnregistrement(_enregistrement);
+            }
             NavigationService.NavigateAsync("/Menu/NavigationPage/MainPage/Enregistrements");
         }
 

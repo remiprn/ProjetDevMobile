@@ -8,6 +8,7 @@ namespace ProjetDevMobile.Models
     {
         public enum ETag { Drink,Food,ToSee}
 
+        public int Id { get; set; }
         public String Nom { get; set; }
         public String Description { get; set; }
         public String Tag { get; set; }
