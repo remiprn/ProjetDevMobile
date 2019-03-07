@@ -6,14 +6,19 @@
              x:Class="ProjetDevMobile.Views.DetailEnregistrement"
              Title="{Binding Title}">
 
-    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <Image Source="{Binding SourceImage}"/>
-        <Label Text="{Binding Nom}"/>
-        <Label Text="{Binding Description}"/>
-        <Label Text="{Binding Tag}"/>
-        <Label Text="{Binding Position}"/>
-        <Button Text="Update" Command="{Binding CommandUpdateEnregistrement}"/>
-        <Button Text="Delete" Command="{Binding CommandDeleteEnregistrement}"/>
+    <StackLayout HorizontalOptions="FillAndExpand">
+        <StackLayout HeightRequest="200" WidthRequest="200" HorizontalOptions="FillAndExpand">
+            <Image Source="{Binding SourceImage}" Aspect="AspectFit"/>
+        </StackLayout>
+        <StackLayout>
+            <Label Text="{Binding Nom}"/>
+            <Label Text="{Binding Description}"/>
+            <Label Text="{Binding Tag}"/>
+            <Label Text="{Binding Position}"/>
+            <Button Text="Update" Command="{Binding CommandUpdateEnregistrement}"/>
+            <Button Text="Delete" Command="{Binding CommandDeleteEnregistrement}"/>
+        </StackLayout>
+        
     </StackLayout>
   
 </ContentPage>

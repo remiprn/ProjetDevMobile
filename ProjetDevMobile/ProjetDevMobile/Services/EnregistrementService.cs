@@ -18,14 +18,19 @@ namespace ProjetDevMobile.Services
         {
             _liteDBClient = liteDBClient;
 
+            //Mock enregistrement
+            byte[] img = new byte[] { };
+            Enregistrement enregistrement = new Enregistrement("Best beers in town !", "Description 1", "Drink", img, new DateTime(2019,1,1), new Plugin.Geolocator.Abstractions.Position());
+            Enregistrement enregistrement2 = new Enregistrement("Best cookie in town !", "Description 2", "Food", img, new DateTime(2019, 1, 15), new Plugin.Geolocator.Abstractions.Position());
+            _liteDBClient.CleanCollection(_dbCollectionEnregistrement);
+            //_liteDBClient.InsertObjectInDB<Enregistrement>(enregistrement, _dbCollectionEnregistrement);
+            //_liteDBClient.InsertObjectInDB<Enregistrement>(enregistrement2, _dbCollectionEnregistrement);
+
+
             _enregistrements = _liteDBClient.GetCollectionFromDB<Enregistrement>(_dbCollectionEnregistrement);
+            //_enregistrements.Add(enregistrement);
 
-            /*byte[] img = new byte[] { };
-
-            Enregistrement enregistrement = new Enregistrement("Best beers in town !", "Description 1", "Drink", img, DateTime.Today);
-            _enregistrements.Add(enregistrement);
-
-            enregistrement = new Enregistrement("Amazing church", "Description 2", "ToSee", img, new DateTime(2019, 2, 28));
+            /*enregistrement = new Enregistrement("Amazing church", "Description 2", "ToSee", img, new DateTime(2019, 2, 28));
             _enregistrements.Add(enregistrement);
 
             enregistrement = new Enregistrement("Mojito bar", "Description 3", "Drink", img, new DateTime(2019, 2, 15));

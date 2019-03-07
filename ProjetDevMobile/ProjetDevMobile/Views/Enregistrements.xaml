@@ -11,17 +11,25 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters1:CalculeDateConverter x:Key="CalculeDateConverter"/>
+            <converters1:ImageConverter x:Key="ImageConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <StackLayout>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" Orientation="Horizontal">
-            <ImageButton Source="{Binding ImageAdresseDrink}" HeightRequest="40" WidthRequest="40" Command="{Binding CommandChangeTagDrink}"></ImageButton>
-            <Label Text="#Drink"/>
-            <ImageButton Source="{Binding ImageAdresseFood}" HeightRequest="40" WidthRequest="40" Command="{Binding CommandChangeTagFood}"></ImageButton>
-            <Label Text="#Food"/>
-            <ImageButton Source="{Binding ImageAdresseToSee}" HeightRequest="40" WidthRequest="40" Command="{Binding CommandChangeTagToSee}"></ImageButton>
-            <Label Text="#ToSee"/>
+        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <ImageButton Source="{Binding ImageAdresseDrink}" HeightRequest="40" WidthRequest="40" Command="{Binding CommandChangeTagDrink}"></ImageButton>
+                <Label Text="#Drink"/>
+                <ImageButton Source="{Binding ImageAdresseFood}" HeightRequest="40" WidthRequest="40" Command="{Binding CommandChangeTagFood}"></ImageButton>
+                <Label Text="#Food"/>
+                <ImageButton Source="{Binding ImageAdresseToSee}" HeightRequest="40" WidthRequest="40" Command="{Binding CommandChangeTagToSee}"></ImageButton>
+                <Label Text="#ToSee"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="30">
+                <Button Text="↑" Command="{Binding CommandTriHaut}" IsEnabled="{Binding TriHautEnable}" FontSize="20" FontAttributes="Bold"/>
+                <Button Text="↓" Command="{Binding CommandTriBas}" IsEnabled="{Binding TriBasEnable}" FontSize="20" FontAttributes="Bold"/>
+            </StackLayout>
+            
         </StackLayout>
 
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -38,33 +46,23 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout BackgroundColor="LightGray"
-                                         Orientation="Horizontal"
-                                         VerticalOptions="FillAndExpand">
-
-                                <Label
-                                Text="{Binding Nom}"
-                                FontAttributes="Bold"
-                                FontSize="50"
-                                Margin="20,10,10,5"/>
-
-                                <StackLayout Orientation="Horizontal" Spacing="0">
-                                    <Label Text="#"/>
-                                    <Label
-                                    Text="{Binding Tag}"
-                                    FontSize="30"
-                                    Margin="20,10,10,5"/>
+                            <StackLayout BackgroundColor="LightGray" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                <StackLayout HeightRequest="60" WidthRequest="80" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="{Binding Image, Converter={StaticResource ImageConverter}}" Aspect="AspectFit"/>
                                 </StackLayout>
-                                
 
-                                <Label
-                                Text="{Binding Date, Converter={StaticResource CalculeDateConverter}}"
-                                FontSize="20"
-                                FontAttributes="Italic"
-                                VerticalOptions="Center"
-                                HorizontalOptions="End"
-                                HorizontalTextAlignment="End"
-                                Margin="0,0,20,0"/>
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="{Binding Nom}" FontAttributes="Bold" FontSize="50"/>
+                                    <StackLayout Orientation="Horizontal" Spacing="0">
+                                        <Label Text="#" FontSize="30"/>
+                                        <Label Text="{Binding Tag}" FontSize="30"/>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="Red">
+                                    <Label Text="{Binding Date, Converter={StaticResource CalculeDateConverter}}" FontSize="20" FontAttributes="Italic"
+                                           HorizontalTextAlignment="End"/>
+                                </StackLayout>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

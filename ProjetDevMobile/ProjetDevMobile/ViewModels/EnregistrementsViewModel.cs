@@ -18,7 +18,23 @@ namespace ProjetDevMobile.ViewModels
         private Boolean FoodBool = true;
         private Boolean ToSeeBool = true;
 
+        private Boolean OrdreTri = true;
+
         private List<Enregistrement> AllEnregistrements;
+
+        private Boolean _triHautEnable = false;
+        public Boolean TriHautEnable
+        {
+            get { return _triHautEnable; }
+            set { SetProperty(ref _triHautEnable, value); }
+        }
+
+        private Boolean _triBasEnable = true;
+        public Boolean TriBasEnable
+        {
+            get { return _triBasEnable; }
+            set { SetProperty(ref _triBasEnable, value); }
+        }
 
         private String _imageAdresseDrink = imgCheck;
         public String ImageAdresseDrink
@@ -50,6 +66,9 @@ namespace ProjetDevMobile.ViewModels
         public DelegateCommand CommandChangeTagFood { get; private set; }
         public DelegateCommand CommandChangeTagToSee { get; private set; }
         public DelegateCommand<object> OnNavEnregistrement { get; private set; }
+        
+        public DelegateCommand CommandTriHaut { get; private set; }
+        public DelegateCommand CommandTriBas { get; private set; }
 
         private IEnregistrementService _enregistrementService;
 
@@ -65,6 +84,41 @@ namespace ProjetDevMobile.ViewModels
             CommandChangeTagFood = new DelegateCommand(ChangeTagFood);
             CommandChangeTagToSee = new DelegateCommand(ChangeTagToSee);
             OnNavEnregistrement = new DelegateCommand<object>(NavEnregistrement);
+            CommandTriHaut = new DelegateCommand(TriHaut);
+            CommandTriBas = new DelegateCommand(TriBas);
+        }
+
+        private void TriHaut()
+        {
+            this.OrdreTri = true;
+            TriBasEnable = true;
+            TriHautEnable = false;
+            TriEnregistrements();
+        }
+
+        private void TriBas()
+        {
+            this.OrdreTri = false;
+            TriBasEnable = false;
+            TriHautEnable = true;
+            TriEnregistrements();
+        }
+
+        private void TriEnregistrements()
+        {
+            List<Enregistrement> liste = Enregistrements;
+            if (OrdreTri)
+            {
+                var l = liste.OrderBy(item => DateTime.Now.Subtract(item.Date));
+                liste = l.ToList<Enregistrement>();
+                Enregistrements = liste;
+            }
+            else
+            {
+                var l = liste.OrderByDescending(item => DateTime.Now.Subtract(item.Date));
+                liste = l.ToList<Enregistrement>();
+                Enregistrements = liste;
+            }  
         }
 
         private void ChangeTagDrink()
@@ -115,6 +169,7 @@ namespace ProjetDevMobile.ViewModels
                     liste.Add(e);
                 }
             Enregistrements = liste;
+            TriEnregistrements();
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
