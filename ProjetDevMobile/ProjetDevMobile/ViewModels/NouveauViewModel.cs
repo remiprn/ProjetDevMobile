@@ -54,6 +54,12 @@ namespace ProjetDevMobile.ViewModels
             get { return position; }
             set { SetProperty(ref position, value); }
         }
+        private string _adresse = "";
+        public string Adresse
+        {
+            get { return _adresse; }
+            set { SetProperty(ref _adresse, value); }
+        }
         private Boolean _modeNouveau;
         public Boolean ModeNouveau
         {
@@ -100,6 +106,7 @@ namespace ProjetDevMobile.ViewModels
                 SourceImage = _enregistrement.GetImageSource();
                 SelectedTag = _enregistrement.Tag;
                 Position = _enregistrement.GetPositionString();
+                Adresse = _enregistrement.GetAdresseString();
             }
         }
 
