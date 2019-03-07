@@ -20,9 +20,10 @@ namespace ProjetDevMobile.Services
 
             //Mock enregistrement
             byte[] img = new byte[] { };
-            Enregistrement enregistrement = new Enregistrement("Best beers in town !", "Description 1", "Drink", img, new DateTime(2019,1,1), new Plugin.Geolocator.Abstractions.Position());
-            Enregistrement enregistrement2 = new Enregistrement("Best cookie in town !", "Description 2", "Food", img, new DateTime(2019, 1, 15), new Plugin.Geolocator.Abstractions.Position());
-            _liteDBClient.CleanCollection(_dbCollectionEnregistrement);
+            Enregistrement enregistrement = new Enregistrement("Best beers in town !", "Description 1", "Drink", img, "Photo prise à : 12h15", new DateTime(2019,1,1), new Plugin.Geolocator.Abstractions.Position(), new Plugin.Geolocator.Abstractions.Address());
+            Enregistrement enregistrement2 = new Enregistrement("Best cookie in town !", "Description 2", "Food", img, "Photo prise à : 12h47", new DateTime(2019, 1, 15), new Plugin.Geolocator.Abstractions.Position(), new Plugin.Geolocator.Abstractions.Address());
+            //_liteDBClient.CleanCollection(_dbCollectionEnregistrement);
+
             //_liteDBClient.InsertObjectInDB<Enregistrement>(enregistrement, _dbCollectionEnregistrement);
             //_liteDBClient.InsertObjectInDB<Enregistrement>(enregistrement2, _dbCollectionEnregistrement);
 
