@@ -1,4 +1,5 @@
-﻿using Plugin.Media.Abstractions;
+﻿using Plugin.Geolocator.Abstractions;
+using Plugin.Media.Abstractions;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -47,11 +48,17 @@ namespace ProjetDevMobile.ViewModels
             get { return _selectedTag; }
             set { SetProperty(ref _selectedTag, value); }
         }
-        private String position;
+        private String position = "";
         public String Position
         {
             get { return position; }
             set { SetProperty(ref position, value); }
+        }
+        private string _adresse = "";
+        public string Adresse
+        {
+            get { return _adresse; }
+            set { SetProperty(ref _adresse, value); }
         }
         private Boolean _modeNouveau;
         public Boolean ModeNouveau
@@ -65,6 +72,12 @@ namespace ProjetDevMobile.ViewModels
         {
             get { return _sourceImage; }
             set { SetProperty(ref _sourceImage, value); }
+        }
+        private string _heurePhoto = "";
+        public string HeurePhoto
+        {
+            get { return _heurePhoto; }
+            set { SetProperty(ref _heurePhoto, value); }
         }
 
         private byte[] PhotoArray { get; set; }
@@ -97,8 +110,10 @@ namespace ProjetDevMobile.ViewModels
                 Nom = _enregistrement.Nom;
                 Description = _enregistrement.Description;
                 SourceImage = _enregistrement.GetImageSource();
+                HeurePhoto = _enregistrement.HeurePhoto;
                 SelectedTag = _enregistrement.Tag;
-                Position = _enregistrement.Position.Latitude + " - " + _enregistrement.Position.Longitude;
+                Position = _enregistrement.GetPositionString();
+                Adresse = _enregistrement.GetAdresseString();
             }
         }
 
@@ -126,7 +141,9 @@ namespace ProjetDevMobile.ViewModels
             {
                 if (ModeNouveau)
                 {
-                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, DateTime.Today, _geolocalisationService.GetCurrentLocation().Result);
+                    var pos = _geolocalisationService.GetCurrentLocation().Result;
+                    var addresse = _geolocalisationService.GetAddressForPositionAsync(pos).Result;
+                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, HeurePhoto, DateTime.Today, pos, addresse);
                     _enregistrementService.AddEnregistrement(_enregistrement);
                 }
                 else
@@ -147,6 +164,9 @@ namespace ProjetDevMobile.ViewModels
 
             if (photo != null)
             {
+                var now = DateTime.Now;
+                HeurePhoto = "Photo prise à : " + now.Hour + "h" + now.Minute;
+
                 SourceImage = ImageSource.FromStream(photo.GetStream);
                 using (var memoryStream = new MemoryStream())
                 {

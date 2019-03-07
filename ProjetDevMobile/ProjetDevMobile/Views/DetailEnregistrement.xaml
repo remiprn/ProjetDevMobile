@@ -9,16 +9,16 @@
     <StackLayout HorizontalOptions="FillAndExpand">
         <StackLayout HeightRequest="200" WidthRequest="200" HorizontalOptions="FillAndExpand">
             <Image Source="{Binding SourceImage}" Aspect="AspectFit"/>
+            <Label Text="{Binding HeurePhoto}"/>
         </StackLayout>
         <StackLayout>
             <Label Text="{Binding Nom}"/>
             <Label Text="{Binding Description}"/>
             <Label Text="{Binding Tag}"/>
             <Label Text="{Binding Position}"/>
+            <Label Text="{Binding Adresse}"/>
             <Button Text="Update" Command="{Binding CommandUpdateEnregistrement}"/>
             <Button Text="Delete" Command="{Binding CommandDeleteEnregistrement}"/>
         </StackLayout>
-        
     </StackLayout>
-  
 </ContentPage>
