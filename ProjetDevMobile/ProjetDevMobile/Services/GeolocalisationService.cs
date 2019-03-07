@@ -72,8 +72,8 @@ namespace ProjetDevMobile.Services
             Address address = null;
             try
             {
-                var addresses = await _locator.GetAddressesForPositionAsync(position);
-                address = addresses.FirstOrDefault();
+                /*var addresses = await _locator.GetAddressesForPositionAsync(position);
+                address = addresses.FirstOrDefault();*/
             }
             catch (Exception ex)
             {
