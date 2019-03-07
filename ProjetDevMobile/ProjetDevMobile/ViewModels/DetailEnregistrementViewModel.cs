@@ -21,6 +21,12 @@ namespace ProjetDevMobile.ViewModels
             get { return _sourceImage; }
             set { SetProperty(ref _sourceImage, value); }
         }
+        private string _heurePhoto = "";
+        public string HeurePhoto
+        {
+            get { return _heurePhoto; }
+            set { SetProperty(ref _heurePhoto, value); }
+        }
         private string _nom = "";
         public string Nom
         {
@@ -73,6 +79,7 @@ namespace ProjetDevMobile.ViewModels
 
             _enregistrement = parameters.GetValue<Enregistrement>("Enregistrement");
             this.SourceImage = _enregistrement.GetImageSource();
+            this.HeurePhoto = _enregistrement.HeurePhoto;
             this.Nom = _enregistrement.Nom;
             this.Tag = _enregistrement.Tag;
             this.Description = _enregistrement.Description;

@@ -73,6 +73,12 @@ namespace ProjetDevMobile.ViewModels
             get { return _sourceImage; }
             set { SetProperty(ref _sourceImage, value); }
         }
+        private string _heurePhoto = "";
+        public string HeurePhoto
+        {
+            get { return _heurePhoto; }
+            set { SetProperty(ref _heurePhoto, value); }
+        }
 
         private byte[] PhotoArray { get; set; }
 
@@ -104,6 +110,7 @@ namespace ProjetDevMobile.ViewModels
                 Nom = _enregistrement.Nom;
                 Description = _enregistrement.Description;
                 SourceImage = _enregistrement.GetImageSource();
+                HeurePhoto = _enregistrement.HeurePhoto;
                 SelectedTag = _enregistrement.Tag;
                 Position = _enregistrement.GetPositionString();
                 Adresse = _enregistrement.GetAdresseString();
@@ -136,7 +143,7 @@ namespace ProjetDevMobile.ViewModels
                 {
                     var pos = _geolocalisationService.GetCurrentLocation().Result;
                     var addresse = _geolocalisationService.GetAddressForPositionAsync(pos).Result;
-                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, DateTime.Today, pos, addresse);
+                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, HeurePhoto, DateTime.Today, pos, addresse);
                     _enregistrementService.AddEnregistrement(_enregistrement);
                 }
                 else
@@ -157,6 +164,9 @@ namespace ProjetDevMobile.ViewModels
 
             if (photo != null)
             {
+                var now = DateTime.Now;
+                HeurePhoto = "Photo prise à : " + now.Hour + "h" + now.Minute;
+
                 SourceImage = ImageSource.FromStream(photo.GetStream);
                 using (var memoryStream = new MemoryStream())
                 {

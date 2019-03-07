@@ -8,6 +8,7 @@
 
     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <Image Source="{Binding SourceImage}"/>
+        <Label Text="{Binding HeurePhoto}"/>
         <Label Text="{Binding Nom}"/>
         <Label Text="{Binding Description}"/>
         <Label Text="{Binding Tag}"/>
