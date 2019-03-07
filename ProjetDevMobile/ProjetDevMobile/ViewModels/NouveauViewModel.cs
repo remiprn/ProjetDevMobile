@@ -17,6 +17,7 @@ namespace ProjetDevMobile.ViewModels
 	public class NouveauViewModel : ViewModelBase
 	{
         private IEnregistrementService _enregistrementService;
+        private IGeolocalisationService _geolocalisationService;
         private Enregistrement _enregistrement;
 
         public DelegateCommand CommandAjoutEnregistrement { get; private set; }
@@ -46,6 +47,12 @@ namespace ProjetDevMobile.ViewModels
             get { return _selectedTag; }
             set { SetProperty(ref _selectedTag, value); }
         }
+        private String position;
+        public String Position
+        {
+            get { return position; }
+            set { SetProperty(ref position, value); }
+        }
         private Boolean _modeNouveau;
         public Boolean ModeNouveau
         {
@@ -62,12 +69,13 @@ namespace ProjetDevMobile.ViewModels
 
         private byte[] PhotoArray { get; set; }
 
-        public NouveauViewModel(INavigationService navigationService, IEnregistrementService enregistrementService)
+        public NouveauViewModel(INavigationService navigationService, IEnregistrementService enregistrementService, IGeolocalisationService geolocalisationService)
             : base(navigationService)
         {
             CommandAjoutEnregistrement = new DelegateCommand(AjoutEnregistrement, CanAjout).ObservesProperty(() => Nom).ObservesProperty(() => Description).ObservesProperty(() => SourceImage).ObservesProperty(() => SelectedTag);
             CommandPrendrePhoto = new DelegateCommand(PrendrePhotoAsync);
             _enregistrementService = enregistrementService;
+            _geolocalisationService = geolocalisationService;
             ListeTags.AddRange(Enum.GetNames(typeof(Enregistrement.ETag)));
         } 
 
@@ -90,6 +98,7 @@ namespace ProjetDevMobile.ViewModels
                 Description = _enregistrement.Description;
                 SourceImage = _enregistrement.GetImageSource();
                 SelectedTag = _enregistrement.Tag;
+                Position = _enregistrement.Position.Latitude + " - " + _enregistrement.Position.Longitude;
             }
         }
 
@@ -117,7 +126,7 @@ namespace ProjetDevMobile.ViewModels
             {
                 if (ModeNouveau)
                 {
-                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, DateTime.Today);
+                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, DateTime.Today, _geolocalisationService.GetCurrentLocation().Result);
                     _enregistrementService.AddEnregistrement(_enregistrement);
                 }
                 else

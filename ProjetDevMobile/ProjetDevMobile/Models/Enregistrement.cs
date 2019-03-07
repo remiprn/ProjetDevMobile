@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Geolocator.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -16,14 +17,16 @@ namespace ProjetDevMobile.Models
         public String Tag { get; set; }
         public byte[] Image { get; set; }
         public DateTime Date { get; set; }
+        public Position Position { get; set; }
 
-        public Enregistrement(String nom, String description, String tag, byte[] image, DateTime date)
+        public Enregistrement(String nom, String description, String tag, byte[] image, DateTime date, Position position)
         {
             Nom = nom;
             Description = description;
             Tag = tag;
             Image = image;
             Date = date;
+            Position = position;
         }
 
         public Enregistrement() { }

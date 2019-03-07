@@ -12,6 +12,7 @@
         <Entry Text="{Binding Nom}"/>
         <Entry Text="{Binding Description}"/>
         <Picker ItemsSource="{Binding ListeTags}" Title="Tag" SelectedItem="{Binding SelectedTag}" IsEnabled="{Binding ModeNouveau}"/>
+        <Label Text="{Binding Position}"/>
         <Button Text="Save" Command="{Binding CommandAjoutEnregistrement}"/>
     </StackLayout>
   

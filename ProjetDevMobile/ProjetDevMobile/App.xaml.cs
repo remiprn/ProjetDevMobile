@@ -42,6 +42,7 @@ namespace ProjetDevMobile
             containerRegistry.RegisterSingleton<IEnregistrementService, EnregistrementService>();
             containerRegistry.RegisterSingleton<ITagService, TagService>();
             containerRegistry.RegisterSingleton<ILiteDBClient, LiteDBClient>();
+            containerRegistry.RegisterSingleton<IGeolocalisationService, GeolocalisationService>();
         }
     }
 }

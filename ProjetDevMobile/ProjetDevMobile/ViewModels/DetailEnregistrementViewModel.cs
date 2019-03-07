@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using Plugin.Geolocator.Abstractions;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using ProjetDevMobile.Models;
@@ -38,6 +39,12 @@ namespace ProjetDevMobile.ViewModels
             get { return _tag; }
             set { SetProperty(ref _tag, value); }
         }
+        private String position;
+        public String Position
+        {
+            get { return position; }
+            set { SetProperty(ref position, value); }
+        }
 
         public DelegateCommand CommandUpdateEnregistrement { get; private set; }
         public DelegateCommand CommandDeleteEnregistrement { get; private set; }
@@ -63,6 +70,7 @@ namespace ProjetDevMobile.ViewModels
             this.Nom = _enregistrement.Nom;
             this.Tag = _enregistrement.Tag;
             this.Description = _enregistrement.Description;
+            this.Position = _enregistrement.Position.Latitude + " - " + _enregistrement.Position.Longitude;
         }
 
         private async void UpdateEnregistrement()
