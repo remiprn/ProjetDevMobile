@@ -1,11 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:converters="clr-namespace:MyApp.NamespaceConvertersAreIn"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:converters1="clr-namespace:ProjetDevMobile.Services"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProjetDevMobile.Views.Enregistrements"
              Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters1:CalculeDateConverter x:Key="CalculeDateConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <StackLayout>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" Orientation="Horizontal">
@@ -51,7 +58,7 @@
                                 
 
                                 <Label
-                                Text="Today"
+                                Text="{Binding Date, Converter={StaticResource CalculeDateConverter}}"
                                 FontSize="20"
                                 FontAttributes="Italic"
                                 VerticalOptions="Center"
