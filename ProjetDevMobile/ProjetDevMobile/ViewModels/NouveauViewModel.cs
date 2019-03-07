@@ -1,4 +1,5 @@
-﻿using Plugin.Media.Abstractions;
+﻿using Plugin.Geolocator.Abstractions;
+using Plugin.Media.Abstractions;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -47,7 +48,7 @@ namespace ProjetDevMobile.ViewModels
             get { return _selectedTag; }
             set { SetProperty(ref _selectedTag, value); }
         }
-        private String position;
+        private String position = "";
         public String Position
         {
             get { return position; }
@@ -98,7 +99,7 @@ namespace ProjetDevMobile.ViewModels
                 Description = _enregistrement.Description;
                 SourceImage = _enregistrement.GetImageSource();
                 SelectedTag = _enregistrement.Tag;
-                Position = _enregistrement.Position.Latitude + " - " + _enregistrement.Position.Longitude;
+                Position = _enregistrement.GetPositionString();
             }
         }
 
@@ -126,7 +127,9 @@ namespace ProjetDevMobile.ViewModels
             {
                 if (ModeNouveau)
                 {
-                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, DateTime.Today, _geolocalisationService.GetCurrentLocation().Result);
+                    var pos = _geolocalisationService.GetCurrentLocation().Result;
+                    var addresse = _geolocalisationService.GetAddressForPositionAsync(pos).Result;
+                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, DateTime.Today, pos, addresse);
                     _enregistrementService.AddEnregistrement(_enregistrement);
                 }
                 else

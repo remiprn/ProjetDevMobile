@@ -10,5 +10,6 @@ namespace ProjetDevMobile.Services
     {
         bool IsLocationAvailable();
         Task<Position> GetCurrentLocation();
+        Task<Address> GetAddressForPositionAsync(Position position);
     }
 }

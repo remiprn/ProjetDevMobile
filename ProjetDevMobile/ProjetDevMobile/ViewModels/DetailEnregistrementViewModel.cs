@@ -21,7 +21,7 @@ namespace ProjetDevMobile.ViewModels
             get { return _sourceImage; }
             set { SetProperty(ref _sourceImage, value); }
         }
-        private string _nom;
+        private string _nom = "";
         public string Nom
         {
             get { return _nom; }
@@ -33,17 +33,23 @@ namespace ProjetDevMobile.ViewModels
             get { return _description; }
             set { SetProperty(ref _description, value); }
         }
-        private string _tag;
+        private string _tag = "";
         public string Tag
         {
             get { return _tag; }
             set { SetProperty(ref _tag, value); }
         }
-        private String position;
+        private String _position = "N/A";
         public String Position
         {
-            get { return position; }
-            set { SetProperty(ref position, value); }
+            get { return _position; }
+            set { SetProperty(ref _position, value); }
+        }
+        private string _adresse = "";
+        public string Adresse
+        {
+            get { return _adresse; }
+            set { SetProperty(ref _adresse, value); }
         }
 
         public DelegateCommand CommandUpdateEnregistrement { get; private set; }
@@ -70,7 +76,8 @@ namespace ProjetDevMobile.ViewModels
             this.Nom = _enregistrement.Nom;
             this.Tag = _enregistrement.Tag;
             this.Description = _enregistrement.Description;
-            this.Position = _enregistrement.Position.Latitude + " - " + _enregistrement.Position.Longitude;
+            this.Position = _enregistrement.GetPositionString();
+            this.Adresse = _enregistrement.GetAdresseString();
         }
 
         private async void UpdateEnregistrement()
