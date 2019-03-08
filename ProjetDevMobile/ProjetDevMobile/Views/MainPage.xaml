@@ -5,7 +5,7 @@
              Title="{Binding Title}">
 
     <StackLayout HorizontalOptions="CenterAndExpand" Padding="20">
-        <Label Text="Projet developpement mobile" 
+        <Label Text="Projet développement mobile" 
                VerticalOptions="Start" 
                HorizontalTextAlignment="Center" 
                FontSize="30"/>

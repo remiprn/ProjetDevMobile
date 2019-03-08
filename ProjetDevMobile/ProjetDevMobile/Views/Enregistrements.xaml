@@ -47,7 +47,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout BackgroundColor="LightGray" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                                <StackLayout HeightRequest="120" WidthRequest="160" VerticalOptions="Center" HorizontalOptions="Start" BackgroundColor="Yellow">
+                                <StackLayout HeightRequest="120" WidthRequest="160" VerticalOptions="Center" HorizontalOptions="Start" BackgroundColor="Gray">
                                     <Image Source="{Binding Image, Converter={StaticResource ImageConverter}}" Aspect="AspectFit"/>
                                 </StackLayout>
 
@@ -59,7 +59,7 @@
                                     </StackLayout>
                                 </StackLayout>
 
-                                <StackLayout HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Red" Margin="10">
+                                <StackLayout HorizontalOptions="End" VerticalOptions="Center" Margin="10">
                                     <Label Text="{Binding Date, Converter={StaticResource CalculeDateConverter}}" FontSize="20" FontAttributes="Italic"/>
                                 </StackLayout>
                             </StackLayout>

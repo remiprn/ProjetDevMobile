@@ -10,7 +10,8 @@
             <StackLayout Padding="20">
                 <Label
                     Text="Accueil"
-                    FontSize="Large">
+                    FontSize="Large"
+                    FontAttributes="Bold">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding NavigateCommand}" CommandParameter="MainPage"/>
@@ -19,7 +20,8 @@
 
                 <Label
                     Text="Application"
-                    FontSize="Large">
+                    FontSize="Large"
+                    FontAttributes="Bold">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding NavigateCommand}" CommandParameter="Enregistrements"/>
@@ -27,7 +29,8 @@
                 </Label>
                 <Label
                     Text="Carte"
-                    FontSize="Medium">
+                    FontSize="Medium"
+                    Margin="30,0,0,0">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding NavigateCommand}" CommandParameter="Carte"/>
@@ -35,7 +38,8 @@
                 </Label>
                 <Label
                     Text="Enregistrements"
-                    FontSize="Medium">
+                    FontSize="Medium"
+                    Margin="30,0,0,0">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding NavigateCommand}" CommandParameter="Enregistrements"/>
@@ -43,7 +47,8 @@
                 </Label>
                 <Label
                     Text="Nouveau"
-                    FontSize="Medium">
+                    FontSize="Medium"
+                    Margin="30,0,0,0">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding NavigateCommand}" CommandParameter="Nouveau"/>
@@ -52,7 +57,8 @@
 
                 <Label
                     Text="Bonus"
-                    FontSize="Large">
+                    FontSize="Large"
+                    FontAttributes="Bold">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding NavigateCommand}" CommandParameter="Bonus"/>
