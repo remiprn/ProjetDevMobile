@@ -6,19 +6,57 @@
              x:Class="ProjetDevMobile.Views.DetailEnregistrement"
              Title="{Binding Title}">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontAttributes" Value="None"/>
+            </Style>
+
+            <Style x:Key="LabelGras" TargetType="Label">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
         <StackLayout HeightRequest="300" WidthRequest="300" VerticalOptions="Start" HorizontalOptions="Center">
             <Image Source="{Binding SourceImage}" Aspect="AspectFit"/>
             <Label Text="{Binding HeurePhoto}"/>
         </StackLayout>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
-            <Label Text="{Binding Nom}"/>
-            <Label Text="{Binding Description}"/>
-            <Label Text="{Binding Tag}"/>
-            <Label Text="{Binding Position}"/>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Vertical" Margin="10,0,10,0">
+            <Frame BorderColor="LightGray" CornerRadius="5" Padding="2,2,2,2" Margin="10,0,10,10">
+                <StackLayout Orientation="Horizontal" Spacing="0">
+                    <Label Text="Nom : " Style="{StaticResource LabelGras}"/>
+                    <Label Text="{Binding Nom}"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame BorderColor="LightGray" CornerRadius="5" Padding="2,2,2,2" Margin="10,0,10,10">
+                <StackLayout Orientation="Horizontal" Spacing="0">
+                    <Label Text="Description : " Style="{StaticResource LabelGras}"/>
+                    <Label Text="{Binding Description}"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame BorderColor="LightGray" CornerRadius="5" Padding="2,2,2,2" Margin="10,0,10,10">
+                <StackLayout Orientation="Horizontal" Spacing="0">
+                    <Label Text="Tag : " Style="{StaticResource LabelGras}"/>
+                    <Label Text="{Binding Tag}"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame BorderColor="LightGray" CornerRadius="5" Padding="2,2,2,2" Margin="10,0,10,10">
+                <StackLayout Orientation="Horizontal" Spacing="0">
+                    <Label Text="Positions : " Style="{StaticResource LabelGras}"/>
+                    <Label Text="{Binding Position}"/>
+                </StackLayout>
+            </Frame>
+
             <Label Text="{Binding Adresse}"/>
-            <Button Text="Update" Command="{Binding CommandUpdateEnregistrement}"/>
-            <Button Text="Delete" Command="{Binding CommandDeleteEnregistrement}"/>
+            <Button Text="Modifier" Command="{Binding CommandUpdateEnregistrement}" HorizontalOptions="Center"/>
+            <Button Text="Supprimer" Command="{Binding CommandDeleteEnregistrement}" HorizontalOptions="Center"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>

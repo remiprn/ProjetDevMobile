@@ -158,14 +158,28 @@ namespace ProjetDevMobile.ViewModels
 
         private async void PrendrePhotoAsync()
         {
-            var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() {
-                PhotoSize = PhotoSize.Medium,
-            });
+            var reponse = await App.Current.MainPage.DisplayAlert("Photo", "Souhaitez-vous prendre une nouvelle photo ou en sélectionner une de votre galerie ?", "Appareil photo", "Galerie");
+            MediaFile photo;
+            if (reponse)
+            {
+                photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions()
+                {
+                    PhotoSize = PhotoSize.Medium
+                });
+            }
+            else
+            {
+                photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions()
+                {
+                    PhotoSize = PhotoSize.Small
+                });
+            }
+
 
             if (photo != null)
             {
                 var now = DateTime.Now;
-                HeurePhoto = "Photo prise à : " + now.Hour + "h" + now.Minute;
+                HeurePhoto = "Photo enregistrée à : " + now.Hour + "h" + now.Minute;
 
                 SourceImage = ImageSource.FromStream(photo.GetStream);
                 using (var memoryStream = new MemoryStream())
