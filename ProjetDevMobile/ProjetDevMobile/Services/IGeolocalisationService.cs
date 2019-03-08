@@ -1,4 +1,5 @@
 ﻿using Plugin.Geolocator.Abstractions;
+using Xamarin.Forms.Maps;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,7 @@ namespace ProjetDevMobile.Services
     public interface IGeolocalisationService
     {
         bool IsLocationAvailable();
-        Task<Position> GetCurrentLocation();
-        Task<Address> GetAddressForPositionAsync(Position position);
+        Task<Plugin.Geolocator.Abstractions.Position> GetCurrentLocation();
+        Task<string> GetAddressForPositionAsync(Xamarin.Forms.Maps.Position position);
     }
 }

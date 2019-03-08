@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ProjetDevMobile.Client;
 using ProjetDevMobile.Models;
+using Plugin.Geolocator.Abstractions;
 
 namespace ProjetDevMobile.Services
 {
@@ -20,8 +21,8 @@ namespace ProjetDevMobile.Services
 
             //Mock enregistrement
             byte[] img = new byte[] { };
-            Enregistrement enregistrement = new Enregistrement("Best beers in town !", "Description 1", "Drink", img, "Photo prise à : 12h15", new DateTime(2019,1,1), new Plugin.Geolocator.Abstractions.Position(), new Plugin.Geolocator.Abstractions.Address());
-            Enregistrement enregistrement2 = new Enregistrement("Best cookie in town !", "Description 2", "Food", img, "Photo prise à : 12h47", new DateTime(2019, 1, 15), new Plugin.Geolocator.Abstractions.Position(), new Plugin.Geolocator.Abstractions.Address());
+            Enregistrement enregistrement = new Enregistrement("Best beers in town !", "Description 1", "Drink", img, "Photo prise à : 12h15", new DateTime(2019,1,1), new Position(49.108013, 6.167201), "Adresse 1");
+            Enregistrement enregistrement2 = new Enregistrement("Best cookie in town !", "Description 2", "Food", img, "Photo prise à : 12h47", new DateTime(2019, 1, 15), new Position(49.132553, 6.207610), "Adresse 2");
             //_liteDBClient.CleanCollection(_dbCollectionEnregistrement);
 
             //_liteDBClient.InsertObjectInDB<Enregistrement>(enregistrement, _dbCollectionEnregistrement);

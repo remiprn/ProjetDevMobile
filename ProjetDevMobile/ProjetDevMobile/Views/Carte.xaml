@@ -3,7 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:Class="ProjetDevMobile.Views.Carte"
              Title="{Binding Title}">
-  
+
+    <StackLayout VerticalOptions="StartAndExpand" Padding="30">
+        <ContentView Content="{Binding CarteView}"/>
+        <!--<Slider Minimum="1" Maximum="10" Value="{Binding SliderValue, Mode=TwoWay}" ValueChanged="{Binding OnSliderValueChanged}"/>-->
+    </StackLayout>
+    
 </ContentPage>
