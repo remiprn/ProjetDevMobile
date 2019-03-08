@@ -12,15 +12,12 @@ namespace ProjetDevMobile.Services
 {
     public class GeolocalisationService: IGeolocalisationService
     {
-        private IGeolocator _locator;
-        private Geocoder _geocoder;
+        private IGeolocator _locator = CrossGeolocator.Current;
+        private Geocoder _geocoder = new Geocoder();
 
         public GeolocalisationService()
         {
-            _locator = CrossGeolocator.Current;
             _locator.DesiredAccuracy = 100;
-
-            _geocoder = new Geocoder();
         }
 
         public bool IsLocationAvailable()
@@ -51,7 +48,6 @@ namespace ProjetDevMobile.Services
                 }
 
                 position = await _locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
-
             }
             catch (Exception ex)
             {
