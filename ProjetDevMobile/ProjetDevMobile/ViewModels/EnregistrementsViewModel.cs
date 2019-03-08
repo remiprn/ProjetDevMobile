@@ -1,5 +1,4 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 using ProjetDevMobile.Models;
 using ProjetDevMobile.Services;
@@ -10,7 +9,7 @@ using System.Linq;
 
 namespace ProjetDevMobile.ViewModels
 {
-	public class EnregistrementsViewModel : ViewModelBase
+    public class EnregistrementsViewModel : ViewModelBase
 	{
         public static string imgCheck = "@drawable/check.png";
         public static string imgUnCheck = "@drawable/uncheck.png";
@@ -63,6 +62,13 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _enregistrements, value); }
         }
 
+        private string _textBar;
+        public string TextBar
+        {
+            get { return _textBar; }
+            set { SetProperty(ref _textBar, value); }
+        }
+
         public DelegateCommand CommandChangeTagDrink { get; private set; }
         public DelegateCommand CommandChangeTagFood { get; private set; }
         public DelegateCommand CommandChangeTagToSee { get; private set; }
@@ -70,6 +76,9 @@ namespace ProjetDevMobile.ViewModels
         
         public DelegateCommand CommandTriHaut { get; private set; }
         public DelegateCommand CommandTriBas { get; private set; }
+
+        public DelegateCommand SearchCommand { get; private set; }
+        public DelegateCommand CommandReset { get; private set; }
 
         private IEnregistrementService _enregistrementService;
 
@@ -87,6 +96,27 @@ namespace ProjetDevMobile.ViewModels
             OnNavEnregistrement = new DelegateCommand<object>(NavEnregistrement);
             CommandTriHaut = new DelegateCommand(TriHaut);
             CommandTriBas = new DelegateCommand(TriBas);
+            SearchCommand = new DelegateCommand(Search);
+            CommandReset = new DelegateCommand(Reset);
+        }
+
+        private void Reset()
+        {
+            Enregistrements = new ObservableCollection<Enregistrement>(AllEnregistrements);
+            TextBar = "";
+            TriEnregistrements();
+        }
+
+        private void Search()
+        {
+            var l = AllEnregistrements.Where(c => c.Nom.ToLower().Contains(TextBar.ToLower()));
+            ObservableCollection<Enregistrement> obsl = new ObservableCollection<Enregistrement>();
+            foreach (Enregistrement e in l)
+            {
+                obsl.Add(e);
+            }
+            Enregistrements = obsl;
+            TriEnregistrements();
         }
 
         private void TriHaut()

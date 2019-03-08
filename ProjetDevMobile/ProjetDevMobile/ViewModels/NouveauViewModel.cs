@@ -180,7 +180,7 @@ namespace ProjetDevMobile.ViewModels
                         Debug.WriteLine("Unable to get location or address: " + ex);
                     }
 
-                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, HeurePhoto, DateTime.Today, position, adresse);
+                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, HeurePhoto, DateTime.Now, position, adresse);
                     _enregistrementService.AddEnregistrement(_enregistrement);
                 }
                 else

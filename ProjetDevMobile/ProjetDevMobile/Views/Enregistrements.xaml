@@ -48,7 +48,10 @@
                 <Button Text="↑" Command="{Binding CommandTriHaut}" IsEnabled="{Binding TriHautEnable}" Style="{StaticResource LabelTriFiltre}"/>
                 <Button Text="↓" Command="{Binding CommandTriBas}" IsEnabled="{Binding TriBasEnable}" Style="{StaticResource LabelTriFiltre}"/>
             </StackLayout>
-            
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <SearchBar x:Name="SearchBar" SearchCommand="{Binding SearchCommand}" Text="{Binding TextBar}" Placeholder="Recherche indépendante ..."/>
+            <Button Text="Reset" Command="{Binding CommandReset}"/>
         </StackLayout>
 
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

@@ -13,9 +13,9 @@ namespace ProjetDevMobile.Services
             TimeSpan diff = DateTime.Today.Subtract((DateTime)value);
             double nbJour = diff.TotalDays;
             int nbJourInt = System.Convert.ToInt32(nbJour);
-            if(nbJourInt == 0)
+            if(nbJourInt <= 0)
             {
-                return "Today";
+                return "today";
             }
             else if(nbJourInt < 7)
             {
