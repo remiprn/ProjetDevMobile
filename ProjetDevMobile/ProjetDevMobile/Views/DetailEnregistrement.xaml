@@ -55,6 +55,7 @@
             </Frame>
 
             <Label Text="{Binding Adresse}"/>
+            <Button Text="Voir sur la carte" Command="{Binding CommandVoirCarte}" HorizontalOptions="Center"/>
             <Button Text="Modifier" Command="{Binding CommandUpdateEnregistrement}" HorizontalOptions="Center"/>
             <Button Text="Supprimer" Command="{Binding CommandDeleteEnregistrement}" HorizontalOptions="Center"/>
         </StackLayout>

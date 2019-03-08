@@ -6,9 +6,9 @@ namespace ProjetDevMobile.Models
 {
     public class Tag
     {
-        public String Nom { get; set; }
+        public string Nom { get; set; }
 
-        public Tag(String nom)
+        public Tag(string nom)
         {
             Nom = nom;
         }

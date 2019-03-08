@@ -37,8 +37,8 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _triBasEnable, value); }
         }
 
-        private String _imageAdresseDrink = imgCheck;
-        public String ImageAdresseDrink
+        private string _imageAdresseDrink = imgCheck;
+        public string ImageAdresseDrink
         {
             get { return _imageAdresseDrink; }
             set { SetProperty(ref _imageAdresseDrink, value); }

@@ -1,4 +1,4 @@
-﻿using Plugin.Geolocator.Abstractions;
+﻿using Xamarin.Forms.Maps;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -45,8 +45,8 @@ namespace ProjetDevMobile.ViewModels
             get { return _tag; }
             set { SetProperty(ref _tag, value); }
         }
-        private String _position = "N/A";
-        public String Position
+        private string _position = "N/A";
+        public string Position
         {
             get { return _position; }
             set { SetProperty(ref _position, value); }
@@ -58,6 +58,7 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _adresse, value); }
         }
 
+        public DelegateCommand CommandVoirCarte { get; private set; }
         public DelegateCommand CommandUpdateEnregistrement { get; private set; }
         public DelegateCommand CommandDeleteEnregistrement { get; private set; }
 
@@ -67,6 +68,7 @@ namespace ProjetDevMobile.ViewModels
             : base(navigationService)
         {
             Title = "Enregistrement";
+            CommandVoirCarte = new DelegateCommand(VoirCarte);
             CommandUpdateEnregistrement = new DelegateCommand(UpdateEnregistrement);
             CommandDeleteEnregistrement = new DelegateCommand(DeleteEnregistrement);
 
@@ -85,6 +87,14 @@ namespace ProjetDevMobile.ViewModels
             this.Description = _enregistrement.Description;
             this.Position = _enregistrement.GetPositionString();
             this.Adresse = _enregistrement.GetAdresseString();
+        }
+
+        private void VoirCarte()
+        {
+            var navigationParam = new NavigationParameters();
+            navigationParam.Add("Position", new Position(_enregistrement.Position.Latitude, _enregistrement.Position.Longitude));
+            
+            NavigationService.NavigateAsync("Carte", navigationParam);
         }
 
         private async void UpdateEnregistrement()

@@ -16,6 +16,7 @@ namespace ProjetDevMobile.ViewModels
 	{
         private IGeolocalisationService _geolocalisationService;
         private IEnregistrementService _enregistrementService;
+        private Position _pos = new Position();
 
         private Map _carteView;
         public Map CarteView
@@ -81,6 +82,10 @@ namespace ProjetDevMobile.ViewModels
                     CarteView.Pins.Add(pin);
                 }
             }
+
+            _pos = parameters.GetValue<Position>("Position");
+            if (_pos.Latitude != 0 && _pos.Longitude != 0)
+                CarteView.MoveToRegion(MapSpan.FromCenterAndRadius(_pos, Distance.FromMiles(1)));
         }
 
         void OnSliderValueChanged()
