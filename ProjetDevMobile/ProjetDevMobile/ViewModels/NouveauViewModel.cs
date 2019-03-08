@@ -1,4 +1,4 @@
-﻿using Plugin.Geolocator.Abstractions;
+﻿using Xamarin.Forms.Maps;
 using Plugin.Media.Abstractions;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -36,8 +36,8 @@ namespace ProjetDevMobile.ViewModels
             get { return _description; }
             set { SetProperty(ref _description, value); }
         }
-        private List<String> _listeTags = new List<string>();
-        public List<String> ListeTags
+        private List<string> _listeTags = new List<string>();
+        public List<string> ListeTags
         {
             get { return _listeTags; }
             set { SetProperty(ref _listeTags, value); }
@@ -48,8 +48,8 @@ namespace ProjetDevMobile.ViewModels
             get { return _selectedTag; }
             set { SetProperty(ref _selectedTag, value); }
         }
-        private String position = "";
-        public String Position
+        private string position = "";
+        public string Position
         {
             get { return position; }
             set { SetProperty(ref position, value); }
@@ -141,9 +141,11 @@ namespace ProjetDevMobile.ViewModels
             {
                 if (ModeNouveau)
                 {
-                    var pos = _geolocalisationService.GetCurrentLocation().Result;
-                    var addresse = _geolocalisationService.GetAddressForPositionAsync(pos).Result;
-                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, HeurePhoto, DateTime.Today, pos, addresse);
+                    Plugin.Geolocator.Abstractions.Position posTemp = _geolocalisationService.GetCurrentLocation().Result;
+                    Position position = new Position(posTemp.Latitude, posTemp.Longitude);
+                    string addresse = _geolocalisationService.GetAddressForPositionAsync(position).Result;
+                    
+                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, HeurePhoto, DateTime.Today, position, addresse);
                     _enregistrementService.AddEnregistrement(_enregistrement);
                 }
                 else

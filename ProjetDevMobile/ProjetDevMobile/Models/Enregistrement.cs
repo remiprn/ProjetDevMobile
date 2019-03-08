@@ -1,4 +1,4 @@
-﻿using Plugin.Geolocator.Abstractions;
+﻿using Xamarin.Forms.Maps;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,16 +12,16 @@ namespace ProjetDevMobile.Models
         public enum ETag { Drink, Food, ToSee }
 
         public int Id { get; set; }
-        public String Nom { get; set; }
-        public String Description { get; set; }
-        public String Tag { get; set; }
+        public string Nom { get; set; }
+        public string Description { get; set; }
+        public string Tag { get; set; }
         public byte[] Image { get; set; }
-        public String HeurePhoto { get; set; }
+        public string HeurePhoto { get; set; }
         public DateTime Date { get; set; }
         public Position Position { get; set; }
-        public Address Adresse { get; set; }
+        public string Adresse { get; set; }
 
-        public Enregistrement(String nom, String description, String tag, byte[] image, String heurePhoto, DateTime date, Position position, Address adresse)
+        public Enregistrement(string nom, string description, string tag, byte[] image, string heurePhoto, DateTime date, Position position, string adresse)
         {
             Nom = nom;
             Description = description;
@@ -40,7 +40,7 @@ namespace ProjetDevMobile.Models
             return ImageSource.FromStream(() => new MemoryStream(Image));
         }
 
-        public String GetPositionString()
+        public string GetPositionString()
         {
             if (Position != null)
                 return Position.Latitude + " - " + Position.Longitude;
@@ -48,12 +48,12 @@ namespace ProjetDevMobile.Models
                 return "N/A";
         }
 
-        public String GetAdresseString()
+        public string GetAdresseString()
         {
             if(Adresse == null)
                 return "";
             else
-                return Adresse.Thoroughfare + ", " + Adresse.PostalCode + " " + Adresse.Locality;
+                return Adresse;
         }
     }
 }

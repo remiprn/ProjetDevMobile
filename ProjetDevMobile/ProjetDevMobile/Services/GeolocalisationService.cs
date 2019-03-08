@@ -6,17 +6,21 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms.Maps;
 
 namespace ProjetDevMobile.Services
 {
     public class GeolocalisationService: IGeolocalisationService
     {
         private IGeolocator _locator;
+        private Geocoder _geocoder;
 
         public GeolocalisationService()
         {
             _locator = CrossGeolocator.Current;
             _locator.DesiredAccuracy = 100;
+
+            _geocoder = new Geocoder();
         }
 
         public bool IsLocationAvailable()
@@ -27,12 +31,11 @@ namespace ProjetDevMobile.Services
             return _locator.IsGeolocationAvailable;
         }
 
-        public async Task<Position> GetCurrentLocation()
+        public async Task<Plugin.Geolocator.Abstractions.Position> GetCurrentLocation()
         {
-            Position position = null;
+            Plugin.Geolocator.Abstractions.Position position = null;
             try
             {
-
                 position = await _locator.GetLastKnownLocationAsync();
 
                 if (position != null)
@@ -67,13 +70,13 @@ namespace ProjetDevMobile.Services
             return position;
         }
 
-        public async Task<Address> GetAddressForPositionAsync(Position position)
+        public async Task<string> GetAddressForPositionAsync(Xamarin.Forms.Maps.Position position)
         {
-            Address address = null;
+            string address = null;
             try
             {
-                /*var addresses = await _locator.GetAddressesForPositionAsync(position);
-                address = addresses.FirstOrDefault();*/
+                //IEnumerable<string> addresses = await _geocoder.GetAddressesForPositionAsync(position);
+                //address = addresses.FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -83,7 +86,9 @@ namespace ProjetDevMobile.Services
             if (address == null)
                 Console.WriteLine("No address found for position.");
             else
-                Console.WriteLine("Addresss: {0} {1} {2}", address.Thoroughfare, address.Locality, address.CountryCode);
+                Console.WriteLine("Address: {0}", address);
+
+            address = "Adresse mockée !";
 
             return address;
         }
