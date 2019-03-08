@@ -5,6 +5,7 @@ using ProjetDevMobile.Models;
 using ProjetDevMobile.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace ProjetDevMobile.ViewModels
@@ -55,8 +56,8 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _imageAdresseToSee, value); }
         }
 
-        private List<Enregistrement> _enregistrements;
-        public List<Enregistrement> Enregistrements
+        private ObservableCollection<Enregistrement> _enregistrements;
+        public ObservableCollection<Enregistrement> Enregistrements
         {
             get { return _enregistrements; }
             set { SetProperty(ref _enregistrements, value); }
@@ -106,18 +107,18 @@ namespace ProjetDevMobile.ViewModels
 
         private void TriEnregistrements()
         {
-            List<Enregistrement> liste = Enregistrements;
+            ObservableCollection<Enregistrement> liste = Enregistrements;
             if (OrdreTri)
             {
                 var l = liste.OrderBy(item => DateTime.Now.Subtract(item.Date));
-                liste = l.ToList<Enregistrement>();
-                Enregistrements = liste;
+                liste = new ObservableCollection<Enregistrement>(l.ToList<Enregistrement>());
+                Enregistrements = new ObservableCollection<Enregistrement>(liste);
             }
             else
             {
                 var l = liste.OrderByDescending(item => DateTime.Now.Subtract(item.Date));
-                liste = l.ToList<Enregistrement>();
-                Enregistrements = liste;
+                liste = new ObservableCollection<Enregistrement>(l.ToList<Enregistrement>());
+                Enregistrements = new ObservableCollection<Enregistrement>(liste);
             }  
         }
 
@@ -168,7 +169,7 @@ namespace ProjetDevMobile.ViewModels
                 {
                     liste.Add(e);
                 }
-            Enregistrements = liste;
+            Enregistrements = new ObservableCollection<Enregistrement>(liste);
             TriEnregistrements();
         }
 
