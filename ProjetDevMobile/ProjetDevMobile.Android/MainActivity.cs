@@ -2,6 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Plugin.CurrentActivity;
+using Plugin.Media;
 using Prism;
 using Prism.Ioc;
 
@@ -10,18 +11,19 @@ namespace ProjetDevMobile.Droid
     [Activity(Label = "ProjetDevMobile", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        protected override void OnCreate(Bundle bundle)
+        protected override async void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
+            
+            await CrossMedia.Current.Initialize();
+            CrossCurrentActivity.Current.Init(this, bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             Xamarin.FormsMaps.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
-
-            CrossCurrentActivity.Current.Init(this, bundle);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
