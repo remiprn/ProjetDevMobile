@@ -10,6 +10,7 @@
 
     <StackLayout VerticalOptions="StartAndExpand" Padding="30">
         <ContentView Content="{Binding CarteView}"/>
+        <Label Text="Carte indisponible : vérifier votre connection internet et votre géolocalisation" IsVisible="{Binding CarteDispo}"/>
         <!--<Slider Minimum="1" Maximum="10" Value="{Binding SliderValue, Mode=TwoWay}" ValueChanged="{Binding OnSliderValueChanged}"/>-->
     </StackLayout>
     

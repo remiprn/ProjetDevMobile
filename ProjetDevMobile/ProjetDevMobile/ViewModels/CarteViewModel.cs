@@ -18,7 +18,7 @@ namespace ProjetDevMobile.ViewModels
         private IEnregistrementService _enregistrementService;
         private Position _pos = new Position();
 
-        private Map _carteView;
+        private Map _carteView = null;
         public Map CarteView
         {
             get { return _carteView; }
@@ -29,6 +29,12 @@ namespace ProjetDevMobile.ViewModels
         {
             get { return _enregistrements; }
             set { SetProperty(ref _enregistrements, value); }
+        }
+        private Boolean _carteDispo = false;
+        public Boolean CarteDispo
+        {
+            get { return _carteDispo; }
+            set { SetProperty(ref _carteDispo, value); }
         }
         private double _sliderValue = 1;
         public double SliderValue
@@ -50,42 +56,53 @@ namespace ProjetDevMobile.ViewModels
 
             Plugin.Geolocator.Abstractions.Position position = _geolocalisationService.GetCurrentLocation().Result;
 
-            CarteView = new Map(
-                    MapSpan.FromCenterAndRadius(
-                    new Position(position.Latitude, position.Longitude), Distance.FromMiles(1)))
-                    {
-                        IsShowingUser = true,
-                        HeightRequest = 1000,
-                        WidthRequest = 320,
-                        VerticalOptions = LayoutOptions.FillAndExpand
-                    };
+            if (position != null)
+            {
+                CarteView = new Map(
+                        MapSpan.FromCenterAndRadius(
+                        new Position(position.Latitude, position.Longitude), Distance.FromMiles(1)))
+                {
+                    IsShowingUser = true,
+                    HeightRequest = 1000,
+                    WidthRequest = 320,
+                    VerticalOptions = LayoutOptions.FillAndExpand
+                };
+            }
+            else
+            {
+                CarteDispo = true;
+            }
         }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
             base.OnNavigatingTo(parameters);
-            CarteView.Pins.Clear();
 
-            Enregistrements = new ObservableCollection<Enregistrement>(_enregistrementService.GetEnregistrements());
-
-            foreach (Enregistrement e in Enregistrements)
+            if (CarteView != null)
             {
-                if (e.Position != null)
-                {
-                    var pin = new Pin
-                    {
-                        Type = PinType.Place,
-                        Position = new Position(e.Position.Latitude, e.Position.Longitude),
-                        Label = e.Nom,
-                        Address = "#" + e.Tag
-                    };
-                    CarteView.Pins.Add(pin);
-                }
-            }
+                CarteView.Pins.Clear();
 
-            _pos = parameters.GetValue<Position>("Position");
-            if (_pos.Latitude != 0 && _pos.Longitude != 0)
-                CarteView.MoveToRegion(MapSpan.FromCenterAndRadius(_pos, Distance.FromMiles(1)));
+                Enregistrements = new ObservableCollection<Enregistrement>(_enregistrementService.GetEnregistrements());
+
+                foreach (Enregistrement e in Enregistrements)
+                {
+                    if (e.Position != null)
+                    {
+                        var pin = new Pin
+                        {
+                            Type = PinType.Place,
+                            Position = new Position(e.Position.Latitude, e.Position.Longitude),
+                            Label = e.Nom,
+                            Address = "#" + e.Tag
+                        };
+                        CarteView.Pins.Add(pin);
+                    }
+                }
+
+                _pos = parameters.GetValue<Position>("Position");
+                if (_pos.Latitude != 0 && _pos.Longitude != 0)
+                    CarteView.MoveToRegion(MapSpan.FromCenterAndRadius(_pos, Distance.FromMiles(1)));
+            }
         }
 
         void OnSliderValueChanged()

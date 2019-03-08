@@ -57,6 +57,12 @@ namespace ProjetDevMobile.ViewModels
             get { return _adresse; }
             set { SetProperty(ref _adresse, value); }
         }
+        private Boolean _canVoirCarte;
+        public Boolean CanVoirCarte
+        {
+            get { return _canVoirCarte; }
+            set { SetProperty(ref _canVoirCarte, value); }
+        }
 
         public DelegateCommand CommandVoirCarte { get; private set; }
         public DelegateCommand CommandUpdateEnregistrement { get; private set; }
@@ -87,14 +93,18 @@ namespace ProjetDevMobile.ViewModels
             this.Description = _enregistrement.Description;
             this.Position = _enregistrement.GetPositionString();
             this.Adresse = _enregistrement.GetAdresseString();
+            this.CanVoirCarte = (_enregistrement.Position != null);
         }
 
         private void VoirCarte()
         {
-            var navigationParam = new NavigationParameters();
-            navigationParam.Add("Position", new Position(_enregistrement.Position.Latitude, _enregistrement.Position.Longitude));
-            
-            NavigationService.NavigateAsync("Carte", navigationParam);
+            if (_enregistrement.Position != null)
+            {
+                var navigationParam = new NavigationParameters();
+                navigationParam.Add("Position", new Position(_enregistrement.Position.Latitude, _enregistrement.Position.Longitude));
+
+                NavigationService.NavigateAsync("Carte", navigationParam);
+            }
         }
 
         private async void UpdateEnregistrement()

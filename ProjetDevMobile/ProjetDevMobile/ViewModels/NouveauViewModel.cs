@@ -142,10 +142,14 @@ namespace ProjetDevMobile.ViewModels
                 if (ModeNouveau)
                 {
                     Plugin.Geolocator.Abstractions.Position position = _geolocalisationService.GetCurrentLocation().Result;
-                    Position posTemp = new Position(position.Latitude, position.Longitude);
-                    string addresse = _geolocalisationService.GetAddressForPositionAsync(posTemp).Result;
+                    string adresse = "";
+                    if (position != null)
+                    {
+                        Position posTemp = new Position(position.Latitude, position.Longitude);
+                        adresse = _geolocalisationService.GetAddressForPositionAsync(posTemp).Result;
+                    }
                     
-                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, HeurePhoto, DateTime.Today, position, addresse);
+                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, HeurePhoto, DateTime.Today, position, adresse);
                     _enregistrementService.AddEnregistrement(_enregistrement);
                 }
                 else
