@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ProjetDevMobile.Client;
 using ProjetDevMobile.Models;
-using Xamarin.Forms.Maps;
+using Plugin.Geolocator.Abstractions;
 
 namespace ProjetDevMobile.Services
 {

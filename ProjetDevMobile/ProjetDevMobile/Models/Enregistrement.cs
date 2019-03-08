@@ -1,4 +1,4 @@
-﻿using Xamarin.Forms.Maps;
+﻿using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.IO;

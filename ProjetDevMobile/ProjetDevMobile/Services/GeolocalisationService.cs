@@ -88,7 +88,11 @@ namespace ProjetDevMobile.Services
             else
                 Console.WriteLine("Address: {0}", address);
 
-            address = "Adresse mockée !";
+            /* Condition pour le mockage de l'adresse, si la position n'est pas null */
+            if(position != null)
+            {
+                address = "Adresse mockée !";
+            }
 
             return address;
         }
