@@ -1,5 +1,4 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 using ProjetDevMobile.Models;
 using ProjetDevMobile.Services;
@@ -7,12 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace ProjetDevMobile.ViewModels
 {
-	public class EnregistrementsViewModel : ViewModelBase
+    public class EnregistrementsViewModel : ViewModelBase
 	{
         public static string imgCheck = "@drawable/check.png";
         public static string imgUnCheck = "@drawable/uncheck.png";

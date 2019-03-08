@@ -18,7 +18,7 @@
 
     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
         <StackLayout HeightRequest="300" WidthRequest="300" VerticalOptions="Start" HorizontalOptions="Center">
-            <Image Source="{Binding SourceImage}" Aspect="AspectFit"/>
+            <Image Source="{Binding SourceImage}" Aspect="AspectFill"/>
             <Label Text="{Binding HeurePhoto}"/>
         </StackLayout>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Vertical" Margin="20,0,20,0">

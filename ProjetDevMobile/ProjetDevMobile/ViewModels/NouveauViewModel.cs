@@ -149,7 +149,7 @@ namespace ProjetDevMobile.ViewModels
                         adresse = _geolocalisationService.GetAddressForPositionAsync(posTemp).Result;
                     }
                     
-                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, HeurePhoto, DateTime.Today, position, adresse);
+                    _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, HeurePhoto, DateTime.Now, position, adresse);
                     _enregistrementService.AddEnregistrement(_enregistrement);
                 }
                 else
