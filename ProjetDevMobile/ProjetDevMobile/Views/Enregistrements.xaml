@@ -17,13 +17,13 @@
 
     <StackLayout>
         <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                <ImageButton Source="{Binding ImageAdresseDrink}" HeightRequest="40" WidthRequest="40" Command="{Binding CommandChangeTagDrink}"></ImageButton>
-                <Label Text="#Drink"/>
-                <ImageButton Source="{Binding ImageAdresseFood}" HeightRequest="40" WidthRequest="40" Command="{Binding CommandChangeTagFood}"></ImageButton>
-                <Label Text="#Food"/>
-                <ImageButton Source="{Binding ImageAdresseToSee}" HeightRequest="40" WidthRequest="40" Command="{Binding CommandChangeTagToSee}"></ImageButton>
-                <Label Text="#ToSee"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="30">
+                <ImageButton Source="{Binding ImageAdresseDrink}" HeightRequest="40" WidthRequest="40" BackgroundColor="Transparent" Command="{Binding CommandChangeTagDrink}"></ImageButton>
+                <Label Text="#Drink" FontSize="20"/>
+                <ImageButton Source="{Binding ImageAdresseFood}" HeightRequest="40" WidthRequest="40" BackgroundColor="Transparent" Command="{Binding CommandChangeTagFood}"></ImageButton>
+                <Label Text="#Food" FontSize="20"/>
+                <ImageButton Source="{Binding ImageAdresseToSee}" HeightRequest="40" WidthRequest="40" BackgroundColor="Transparent" Command="{Binding CommandChangeTagToSee}"></ImageButton>
+                <Label Text="#ToSee" FontSize="20"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="30">
                 <Button Text="↑" Command="{Binding CommandTriHaut}" IsEnabled="{Binding TriHautEnable}" FontSize="20" FontAttributes="Bold"/>
@@ -47,11 +47,11 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout BackgroundColor="LightGray" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                                <StackLayout HeightRequest="60" WidthRequest="80" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                <StackLayout HeightRequest="120" WidthRequest="160" VerticalOptions="Center" HorizontalOptions="Start" BackgroundColor="Yellow">
                                     <Image Source="{Binding Image, Converter={StaticResource ImageConverter}}" Aspect="AspectFit"/>
                                 </StackLayout>
 
-                                <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                                     <Label Text="{Binding Nom}" FontAttributes="Bold" FontSize="50"/>
                                     <StackLayout Orientation="Horizontal" Spacing="0">
                                         <Label Text="#" FontSize="30"/>
@@ -59,9 +59,8 @@
                                     </StackLayout>
                                 </StackLayout>
 
-                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="Red">
-                                    <Label Text="{Binding Date, Converter={StaticResource CalculeDateConverter}}" FontSize="20" FontAttributes="Italic"
-                                           HorizontalTextAlignment="End"/>
+                                <StackLayout HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Red" Margin="10">
+                                    <Label Text="{Binding Date, Converter={StaticResource CalculeDateConverter}}" FontSize="20" FontAttributes="Italic"/>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>

@@ -6,12 +6,12 @@
              x:Class="ProjetDevMobile.Views.DetailEnregistrement"
              Title="{Binding Title}">
 
-    <StackLayout HorizontalOptions="FillAndExpand">
-        <StackLayout HeightRequest="200" WidthRequest="200" HorizontalOptions="FillAndExpand">
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+        <StackLayout HeightRequest="300" WidthRequest="300" VerticalOptions="Start" HorizontalOptions="Center">
             <Image Source="{Binding SourceImage}" Aspect="AspectFit"/>
             <Label Text="{Binding HeurePhoto}"/>
         </StackLayout>
-        <StackLayout>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
             <Label Text="{Binding Nom}"/>
             <Label Text="{Binding Description}"/>
             <Label Text="{Binding Tag}"/>
