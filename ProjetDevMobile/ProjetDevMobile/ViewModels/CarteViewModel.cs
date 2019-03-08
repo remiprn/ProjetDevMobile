@@ -1,4 +1,6 @@
-﻿using Prism.Commands;
+﻿using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using ProjetDevMobile.Models;
@@ -6,9 +8,11 @@ using ProjetDevMobile.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
+using Position = Xamarin.Forms.Maps.Position;
 
 namespace ProjetDevMobile.ViewModels
 {
@@ -73,11 +77,11 @@ namespace ProjetDevMobile.ViewModels
                 CarteDispo = true;
             }
         }
-
+        
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
             base.OnNavigatingTo(parameters);
-
+            
             if (CarteView != null)
             {
                 CarteView.Pins.Clear();

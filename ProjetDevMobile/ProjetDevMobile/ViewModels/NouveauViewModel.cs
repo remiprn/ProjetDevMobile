@@ -12,6 +12,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static ProjetDevMobile.Models.Enregistrement;
+using Plugin.Geolocator.Abstractions;
+using Plugin.Geolocator;
+using System.Diagnostics;
 
 namespace ProjetDevMobile.ViewModels
 {
@@ -141,14 +144,42 @@ namespace ProjetDevMobile.ViewModels
             {
                 if (ModeNouveau)
                 {
+                    /* Version qui devrait fonctionner avec le service GeolocalisationService
+                     * 
                     Plugin.Geolocator.Abstractions.Position position = _geolocalisationService.GetCurrentLocation().Result;
                     string adresse = "";
                     if (position != null)
                     {
                         Position posTemp = new Position(position.Latitude, position.Longitude);
                         adresse = _geolocalisationService.GetAddressForPositionAsync(posTemp).Result;
-                    }
+                    }*/
                     
+                    IGeolocator locator = CrossGeolocator.Current;
+                    Geocoder geocoder = new Geocoder();
+                    Plugin.Geolocator.Abstractions.Position position = null;
+                    string adresse = "";
+                    try
+                    {
+                        position = await locator.GetLastKnownLocationAsync();
+                        if (position == null)
+                        {
+                            if (CrossGeolocator.IsSupported && locator.IsGeolocationAvailable && locator.IsGeolocationEnabled)
+                            {
+                                position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
+                            }
+                        }
+
+                        if (position != null)
+                        {
+                            var adresses = await geocoder.GetAddressesForPositionAsync(new Xamarin.Forms.Maps.Position(position.Latitude, position.Longitude));
+                            adresse = adresses.FirstOrDefault();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("Unable to get location or address: " + ex);
+                    }
+
                     _enregistrement = new Enregistrement(Nom, Description, SelectedTag, PhotoArray, HeurePhoto, DateTime.Today, position, adresse);
                     _enregistrementService.AddEnregistrement(_enregistrement);
                 }

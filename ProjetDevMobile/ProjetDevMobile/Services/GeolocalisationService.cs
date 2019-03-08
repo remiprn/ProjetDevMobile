@@ -71,8 +71,8 @@ namespace ProjetDevMobile.Services
             string address = null;
             try
             {
-                //IEnumerable<string> addresses = await _geocoder.GetAddressesForPositionAsync(position);
-                //address = addresses.FirstOrDefault();
+                IEnumerable<string> addresses = await _geocoder.GetAddressesForPositionAsync(position);
+                address = addresses.FirstOrDefault();
             }
             catch (Exception ex)
             {
