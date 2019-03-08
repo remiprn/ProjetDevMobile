@@ -5,5 +5,10 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProjetDevMobile.Views.Bonus"
              Title="{Binding Title}">
-  
+
+    <StackLayout>
+        <Label Text="Galerie pour sélectionner une photo"/>
+        <Label Text="Recherche dans la vue Enregistrements"/>
+        <Label Text="Bouton 'Voir sur la carte' dans la vue DetailEnregistrement"/>
+    </StackLayout>
 </ContentPage>
